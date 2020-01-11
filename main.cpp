@@ -19,7 +19,7 @@ int main(int argc, char** argv){
     bool done = false;
     char cmd;
     int in = 1;
-    std::vector<std::shared_ptr<Sub>> subs;// вектор с обработчиками
+    std::vector<std::shared_ptr<Subscriber>> subs;// вектор с обработчиками
     subs.push_back(std::make_shared<Consol>());
     subs.push_back(std::make_shared<File>());
     std::thread subscriber([&]() {
@@ -40,9 +40,8 @@ int main(int argc, char** argv){
         }
     });
     while(cmd != 'q') {
-        std::cout << "'q'-quit, 'c'-continue , m -menu" << std::endl;
+        std::cout << "'q'-quit, 'c'-continue , Figures: square, trapez, rectangle" << std::endl;
         std::cin >> cmd;
-        if ( cmd ='m') std::cout << "Figures: square, trapez, rectangle" << std::endl;
         if (cmd != 'q') {
             std::unique_lock<std::mutex> main_lock(mutex); // главный поток
             for (int i = 0; i < SizeVector; i++) {
@@ -55,6 +54,6 @@ int main(int argc, char** argv){
     }
     done = true;
     k1.notify_all();
-    subscriber.join(); //блокирует поток
+    subscriber.join(); //Блокирует текущий поток до тех пор, пока поток, обозначенный *this, не завершит свое выполнение
     return 0;
 }

@@ -2,13 +2,13 @@
 #define SUBSCRIBERS_H
 #include <fstream>
 
-class Sub{
+class Subscriber{
 public:
     virtual void output(std::vector<std::shared_ptr<figure>>& Vec) = 0;
-    virtual ~Sub() = default;
+    virtual ~Subscriber()() = default;
 };
 
-class Consol : public Sub {
+class Consol : public Subscriber {
 public:
     void output(std::vector<std::shared_ptr<figure>>& Vec) override {
         for (auto& figure : Vec) {
@@ -17,7 +17,7 @@ public:
     }
 };
 
-class File : public Sub{
+class File : public Subscriber{
 public:
     File() : in(1) {}
     void output(std::vector<std::shared_ptr<figure>>& Vec) override  {
