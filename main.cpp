@@ -17,7 +17,7 @@ int main(int argc, char** argv){
     factory Factory; // фабрика создания фигур
 
     bool done = false;
-    char cmd = 'd';
+    char cmd;
     int in = 1;
     std::vector<std::shared_ptr<Sub>> subs;// вектор с обработчиками
     subs.push_back(std::make_shared<Consol>());
@@ -40,8 +40,9 @@ int main(int argc, char** argv){
         }
     });
     while(cmd != 'q') {
-        std::cout << "'q'-quit, 'c'-continue" << std::endl;
+        std::cout << "'q'-quit, 'c'-continue , m -menu" << std::endl;
         std::cin >> cmd;
+        if ( cmd ='m') std::cout << "Figures: square, trapez, rectangle" << std::endl;
         if (cmd != 'q') {
             std::unique_lock<std::mutex> main_lock(mutex); // главный поток
             for (int i = 0; i < SizeVector; i++) {
