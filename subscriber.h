@@ -5,7 +5,7 @@
 class Subscriber{
 public:
     virtual void output(std::vector<std::shared_ptr<figure>>& Vec) = 0;
-    virtual ~Subscriber()() = default;
+    virtual ~Subscriber() = default;
 };
 
 class Consol : public Subscriber {
